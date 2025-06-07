@@ -1,4 +1,4 @@
-###### This project represents a kanban board app with 3 sections: TO DO, IN PROGRESS and DONE.
+This project represents a kanban board app with 3 sections: TO DO, IN PROGRESS and DONE.
 The app was made with:
 - HTML
 - CSS
