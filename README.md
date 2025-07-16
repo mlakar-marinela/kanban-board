@@ -7,6 +7,6 @@ The app was made with:
 - VITE
   
 Key functionalities:
-1. generating new list items. Each list has a button that can generate a new list item by calling the click event.
-2. content editing functionality for each list item (already present/ newly generated).
-3. drag and drop functionality. This feature is available for each list item from the app. This feature adds dynamic interaction between the app and the user. 
+- list item creation. Each column (TO DO, IN PROGRESS, DONE) includes a button that allows users to create new list items with a single click, streamlining task input and organization.
+- inline content editing. Users can edit the text of any list item — whether pre-existing or newly created — directly within the board, providing a flexible and efficient way to update tasks.
+- drag and drop support. Tasks can be moved freely between the three sections using a drag-and-drop interface, making it easy to reflect progress visually and interactively.
