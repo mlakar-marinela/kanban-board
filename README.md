@@ -1,5 +1,3 @@
-<img width="2516" height="1290" alt="Screenshot (151)d" src="https://github.com/user-attachments/assets/f87f6247-ddb7-45d8-8ada-84174b669791" />
-
 This project represents a kanban board app with 3 sections: TO DO, IN PROGRESS and DONE.
 
 The app was made with:
@@ -19,3 +17,7 @@ Key functionalities:
 - inline content editing. Users can edit the text of any list item, whether pre-existing or newly created, directly within the board, providing a flexible and efficient way to update tasks.
   
 - drag and drop support. Tasks can be moved freely between the three sections using a drag-and-drop interface, making it easy to reflect progress visually and interactively.
+
+Here's a picture with how the interface looks like:
+
+<img width="2516" height="1290" alt="Screenshot (151)d" src="https://github.com/user-attachments/assets/f87f6247-ddb7-45d8-8ada-84174b669791" />
