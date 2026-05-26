@@ -22,19 +22,19 @@ function App() {
       2. the <li> that has been dragged has text, but the <li> element from the dropTarget has text. Here the <li> element that has been dragged should come second.
   */  
   const handleDrop = (e) => {
-   e.preventDefault();
-   const data = e.dataTransfer.getData("text/plain");
-   const draggedElement = document.getElementById(data);
-   let dropTarget = e.target;
-   let targetLi = dropTarget.closest("li");
-   let targetUl = dropTarget.closest("ul");
-   if (!targetUl || !draggedElement) return;
-   if (targetLi && targetLi.textContent.trim() === "" && targetLi.children.length === 0) {
-    targetUl.insertBefore(draggedElement, targetLi);
-   } else {
-    targetUl.appendChild(draggedElement);
-   }
-  };
+     e.preventDefault();
+     const data = e.dataTransfer.getData("text/plain");
+     const draggedElement = document.getElementById(data);
+     let dropTarget = e.target;
+     let targetLi = dropTarget.closest("li");
+     let targetUl = dropTarget.closest("ul");
+     if (!targetUl || !draggedElement) return;
+     if (targetLi && targetLi.textContent.trim() === "" && targetLi.children.length === 0) {
+      targetUl.insertBefore(draggedElement, targetLi);
+     } else {
+      targetUl.appendChild(draggedElement);
+     }
+   };
 
 // Alow the <li> to be contentEditable
   const activateContentEditing = (e) => {
