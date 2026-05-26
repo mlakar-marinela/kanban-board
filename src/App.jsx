@@ -1,45 +1,66 @@
 import { useState } from 'react';
 import './App.css'
 
+let index = 0;
+
 function App() {
-const [tasks, setTasks] = useState(["Task 1", "Task2", "Task3"]);
+  const [tasks, setTasks] = useState(["Task 1", "Task 2", "Task 3"]);
+
+  // Allow drop
   const allowDrop = (e) => {
     e.preventDefault();
   };
-  
+
+  // Identify the <li> that you want to drag
   const dragStart = (e) => {
-    e.dataTransfer.setData("text/plain", e.target.id);
+    e.dataTransfer.setData("text/plain", e.currentTarget.id);
   };
 
+  /* Drop the <li> that you identified above in the <ul> 
+     Here we have 2 cases: 
+      1. the <li> that has been dragged has text, but the <li> element from the dropTarget doesn't have text. Here the <li> element that has been dragged should come first.
+      2. the <li> that has been dragged has text, but the <li> element from the dropTarget has text. Here the <li> element that has been dragged should come second.
+  */  
   const handleDrop = (e) => {
-    e.preventDefault();
-    const data = e.dataTransfer.getData("text/plain");
-    const draggedElement = document.getElementById(data);
-    const target = e.target;
-    if(target.tagName === 'UL') {
-      target.appendChild(draggedElement);
-    }
+   e.preventDefault();
+   const data = e.dataTransfer.getData("text/plain");
+   const draggedElement = document.getElementById(data);
+   let dropTarget = e.target;
+   let targetLi = dropTarget.closest("li");
+   let targetUl = dropTarget.closest("ul");
+   if (!targetUl || !draggedElement) return;
+   if (targetLi && targetLi.textContent.trim() === "" && targetLi.children.length === 0) {
+    targetUl.insertBefore(draggedElement, targetLi);
+   } else {
+    targetUl.appendChild(draggedElement);
+   }
   };
 
+// Alow the <li> to be contentEditable
   const activateContentEditing = (e) => {
     e.currentTarget.contentEditable = 'true';
     e.currentTarget.focus();
   }
 
-  const stopContentEditing = (e, index) => {
-    const updatedTasks = [...tasks];
-    updatedTasks[index] = e.currentTarget.innerText;
-    setTasks(updatedTasks);
+// Update the state of the content from the <li> element and stop the content editing
+  const stopContentEditing = (e) => {
+    const index = e.currentTarget.getAttribute("data-task-index");
+    if (index !== null) {
+      const updatedTasks = [...tasks];
+      updatedTasks[parseInt(index)] = e.currentTarget.innerText;
+      setTasks(updatedTasks);
+    }
     e.currentTarget.contentEditable = 'false';
   }
 
-  let index = 0;
-
+// Generate a new <li> element
   const generateListItem = (boxClass) => {
     const newListItem = document.createElement('li');
+    const uniqueId = 'new' + index++;
     newListItem.classList.add('newListItem');
-    newListItem.id = 'new' + index++;
+    newListItem.id = uniqueId;
     newListItem.setAttribute('contentEditable', 'false');
+    newListItem.setAttribute('key', {index});
     newListItem.setAttribute('draggable', 'true');
     newListItem.addEventListener('dragstart', dragStart);
     newListItem.addEventListener('dblclick', activateContentEditing);
@@ -57,13 +78,10 @@ const [tasks, setTasks] = useState(["Task 1", "Task2", "Task3"]);
          <label className='lbl3'>DONE</label>
    </div>
         <ul className='box1' onDragOver={allowDrop} onDrop={handleDrop}>
-          <li id='one' className='first' contentEditable='false'  key ={index} draggable="true" onDragStart={dragStart} onDoubleClick={activateContentEditing} onBlur={(e) => stopContentEditing(e, index)}></li>
         </ul>
         <ul className='box2' onDragOver={allowDrop} onDrop={handleDrop}>
-          <li id='two' className='second' contentEditable='false' key ={index} draggable="true" onDragStart={dragStart} onDoubleClick={activateContentEditing} onBlur={(e) => stopContentEditing(e, index)}></li>
         </ul>
         <ul className='box3' onDragOver={allowDrop} onDrop={handleDrop}>
-          <li id='three' className='third' contentEditable='false' key ={index} draggable="true" onDragStart={dragStart} onDoubleClick={activateContentEditing} onBlur={(e) => stopContentEditing(e, index)}></li>
         </ul>
       </div>
       <div className='buttons'>
