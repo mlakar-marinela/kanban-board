@@ -126,7 +126,8 @@
   margin-top: 10%;
   transform: translate(-7%,0);
   list-style-type: none;
-  word-break: break-all;
+  word-break: keep-all;
+  font-family: 'Times New Roman', Times, serif;
   visibility:visible;
   background-color: inherit;
   border-color: inherit;
