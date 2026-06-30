@@ -2,7 +2,7 @@
 
 This project represents a kanban board app with 3 sections: TO DO, IN PROGRESS and DONE.
 
-Tech stack: HTML, CSS, JavaScript, React, VITE.
+Tech stack: HTML, CSS, JavaScript, React, Vite.
 
 Key functionalities:
 
